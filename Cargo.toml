@@ -12,15 +12,19 @@ path = "src/01_LED/led.rs"
 
 [[bin]]
 name = "btn_and_led"
-path = "src/02_BtnAndLed/BtnAndLed.rs"
+path = "src/02_BtnAndLed/btnAndLed.rs"
 
 [[bin]]
 name = "8led"
-path = "src/03_8Led/03_8Led.rs"
+path = "src/03_8Led/8Led.rs"
 
 [[bin]]
 name = "pwm_led"
-path = "src/04_PwmLed/04_PwmLed.rs"
+path = "src/04_PwmLed/pwmLed.rs"
+
+[[bin]]
+name = "rgb"
+path = "src/05_RGB/rgb.rs"
 
 [dependencies]
 anyhow = "1.0.32"
