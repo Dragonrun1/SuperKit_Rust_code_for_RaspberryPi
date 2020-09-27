@@ -1,6 +1,6 @@
 [package]
 name = "SuperKit_Rust_code_for_RaspberryPi"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
 categories = ["embedded", "hardware-support", "os", "os::linux-apis"]
@@ -13,6 +13,10 @@ path = "src/01_LED/led.rs"
 [[bin]]
 name = "btn_and_led"
 path = "src/02_BtnAndLed/BtnAndLed.rs"
+
+[[bin]]
+name = "8led"
+path = "src/03_8Led/03_8Led.rs"
 
 [dependencies]
 anyhow = "1.0.32"
