@@ -3,6 +3,8 @@ name = "SuperKit_Rust_code_for_RaspberryPi"
 version = "0.0.2"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
+categories = ["embedded", "hardware-support", "os", "os::linux-apis"]
+keywords = ["raspberry", "pi", "embedded-hal", "embedded-hardware", "hal"]
 
 [[bin]]
 name = "led"
