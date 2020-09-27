@@ -1,7 +1,19 @@
 [package]
 name = "SuperKit_Rust_code_for_RaspberryPi"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
 
+[[bin]]
+name = "led"
+path = "src/01_LED/led.rs"
+
+[[bin]]
+name = "btn_and_led"
+path = "src/02_BtnAndLed/BtnAndLed.rs"
+
 [dependencies]
+anyhow = "1.0.32"
+ctrlc = { version = "3.1.6", features = ["termination"] }
+embedded-hal = { version = "0.2.4", features = ["unproven"] }
+rppal = { version = "0.11.3", features = ["hal", "hal-unproven"] }
