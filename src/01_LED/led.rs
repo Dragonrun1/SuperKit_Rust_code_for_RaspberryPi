@@ -63,8 +63,8 @@ fn main() -> Result<()> {
 }
 
 fn setup() -> Result<OutputPin> {
-    let gpoi = Gpio::new().context("Failed to get GPIO instance")?;
-    let mut led = gpoi
+    let gpio = Gpio::new().context("Failed to get GPIO instance")?;
+    let mut led = gpio
         .get(LED_PIN)
         .context("Failed to get led pin")?
         .into_output();

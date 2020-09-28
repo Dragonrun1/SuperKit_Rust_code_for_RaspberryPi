@@ -74,10 +74,10 @@ fn main() -> Result<()> {
 }
 
 fn setup(pins: [u8; 8]) -> Result<Vec<OutputPin>> {
-    let gpoi = Gpio::new().context("Failed to get GPIO instance")?;
+    let gpio = Gpio::new().context("Failed to get GPIO instance")?;
     let mut outputs = Vec::new();
     for pin in pins.iter() {
-        let mut led = gpoi.get(*pin).context("Failed to get pin")?.into_output();
+        let mut led = gpio.get(*pin).context("Failed to get pin")?.into_output();
         led.set_high();
         outputs.push(led);
     }
