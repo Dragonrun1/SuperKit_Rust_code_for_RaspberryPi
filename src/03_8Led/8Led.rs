@@ -53,13 +53,17 @@ fn main() -> Result<()> {
     })
     .context("Error setting Ctrl-C handler")?;
     // Loop until Ctrl-C is received.
-    while running.load(Ordering::SeqCst) {
+    'outer: while running.load(Ordering::SeqCst) {
         // Flash LEDs in sequence.
         println!("forward ...");
         for led in leds.iter_mut() {
             led.set_low();
             sleep(Duration::from_millis(DELAY));
             led.set_high();
+        }
+        // Improves Ctrl-C responsiveness.
+        if !running.load(Ordering::SeqCst) {
+            break 'outer;
         }
         // Flash LEDs in reverse sequence.
         println!("... reverse");

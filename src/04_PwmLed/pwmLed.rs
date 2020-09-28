@@ -52,7 +52,7 @@ fn main() -> Result<()> {
     })
     .context("Error setting Ctrl-C handler")?;
     // Loop until Ctrl-C is received.
-    while running.load(Ordering::SeqCst) {
+    'outer: while running.load(Ordering::SeqCst) {
         println!("brighter ...");
         // Using inclusive end point for range.
         for i in (0..=100).step_by(4) {
@@ -61,6 +61,10 @@ fn main() -> Result<()> {
             sleep(Duration::from_millis(DELAY));
         }
         sleep(Duration::from_secs(1));
+        // Improves Ctrl-C responsiveness.
+        if !running.load(Ordering::SeqCst) {
+            break 'outer;
+        }
         println!("... dimmer");
         for i in (0..=100).rev().step_by(4) {
             led.set_pwm_frequency(FREQUENCY, i as f64 / 100.0)
