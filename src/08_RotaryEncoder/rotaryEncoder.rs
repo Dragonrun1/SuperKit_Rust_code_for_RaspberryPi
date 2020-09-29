@@ -49,13 +49,17 @@ fn main() -> Result<()> {
             .model()
     );
     let (clk, dt, mut sw) = setup()?;
+    // Used to access counter in main().
     let counter = Arc::new(AtomicI32::new(0));
+    // Used in interrupt callback function to update counter.
     let c = counter.clone();
-    println!("counter = {}", c.load(Ordering::SeqCst));
-    sw.set_async_interrupt(Trigger::FallingEdge, move |_: Level| {
+    // Declare an anonymous closure (function) that acts like the clear() from
+    // the Python code.
+    let clear = move |_: Level| {
         c.store(0, Ordering::SeqCst);
         println!("counter = {}", c.load(Ordering::SeqCst));
-    })?;
+    };
+    sw.set_async_interrupt(Trigger::FallingEdge, clear)?;
     // Stuff needed to nicely handle Ctrl-C from user.
     let running = Arc::new(AtomicBool::new(true));
     let r = running.clone();
@@ -65,6 +69,7 @@ fn main() -> Result<()> {
     .context("Error setting Ctrl-C handler")?;
     // Initialize current clk as last clk.
     let mut last_clk = clk.read();
+    println!("counter = {}", counter.load(Ordering::SeqCst));
     // Loop until Ctrl-C is received.
     while running.load(Ordering::SeqCst) {
         // Read the current pin values.
