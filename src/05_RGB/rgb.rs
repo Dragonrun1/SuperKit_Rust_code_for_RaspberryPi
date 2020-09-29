@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Since the Python code went with global variables everywhere and the C code is
-// doing its own very different thing here I've decided it time to show a much
-// more idiomatic Rust way of doing things.
+// Since the Python code went with global mutable variables everywhere and the
+// C code is doing its own very different thing here I've decided it time to
+// show a much more idiomatic Rust way of doing things.
 // I'm introducing a structure with an implantation to contain what up to now
 // would have been just global scope functions.
 // The constants have been left in global scope as there is no real benefit to
@@ -58,6 +58,7 @@ const FREQUENCY: f64 = 2000.0;
 // Gpio pin numbers.
 const PINS: [u8; 3] = [17, 18, 27];
 
+/// Structure for Pulse Width Modulated RGB led.
 pub struct RgbPwm {
     red: OutputPin,
     green: OutputPin,
@@ -65,6 +66,7 @@ pub struct RgbPwm {
 }
 
 impl RgbPwm {
+    /// More idiomatic way of doing setup.
     pub fn new() -> Result<Self> {
         let gpio = Gpio::new().context("Failed to get GPIO instance")?;
         let mut red = gpio
@@ -91,12 +93,14 @@ impl RgbPwm {
             .context("Failed to initialize PWM for blue LED")?;
         Ok(RgbPwm { red, green, blue })
     }
+    /// Internal associative method (function).
     fn scale(x: u32) -> f64 {
         // (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
         // Better (more accurate) to just pre-calculate multiplier where minimums
         // are all zero.
         x as f64 * 3.92156862745098e-3f64
     }
+    /// Externally accessible method of instance used to modify state.
     pub fn set_color(&mut self, color: u32) -> Result<()> {
         // Extract each value from given color.
         // Showing explicit type info only on the first variable.
@@ -105,9 +109,9 @@ impl RgbPwm {
         let blue = color & 0x0000FF;
         // Scale from 0-255 range to 0-100 duty cycle.
         // Showing explicit type info only on the first shadow variable.
-        let red: f64 = RgbPwm::scale(red);
-        let green = RgbPwm::scale(green);
-        let blue = RgbPwm::scale(blue);
+        let red: f64 = Self::scale(red);
+        let green = Self::scale(green);
+        let blue = Self::scale(blue);
         // Set the new duty cycles.
         self.red
             .set_pwm_frequency(FREQUENCY, red)
