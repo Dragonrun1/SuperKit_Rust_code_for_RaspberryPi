@@ -32,8 +32,8 @@ use std::{
     thread::sleep,
     time::Duration,
 };
-// Once again Python code is using global mutable state which doesn't really
-// work well in Rust. Python code made decoding of encoder overly hard so
+// Once again Python code is using all global mutable state which doesn't really
+// work well in Rust. Python code made decoding of rotary encoder overly hard so
 // changed to something simpler with only one piece of shared state for counter.
 
 const DT_PIN: u8 = 17;
