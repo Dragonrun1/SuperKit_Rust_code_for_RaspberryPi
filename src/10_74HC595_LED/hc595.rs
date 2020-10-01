@@ -122,9 +122,9 @@ impl HC595 {
     }
     /// Some function as hc595_in() from Python code.
     pub fn serial_in(&mut self, data: u8) {
-        // Switch from bit shifting data around to iterating pre-calculated mask
-        // values.
-        for mask in ([0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80]).iter() {
+        // Switch from bit shifting data around to iterating pre-calculated bit
+        // mask values.
+        for mask in ([0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01]).iter() {
             if data & mask > 0 {
                 self.sdi.set_high();
             } else {
