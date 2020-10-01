@@ -50,8 +50,13 @@ path = "src/10_74HC595_LED/hc595.rs"
 name = "segment"
 path = "src/11_Segment/segment.rs"
 
+[[bin]]
+name = "dice"
+path = "src/11_Segment/dice.rs"
+
 [dependencies]
 anyhow = "1.0.32"
 ctrlc = { version = "3.1.6", features = ["termination"] }
 embedded-hal = { version = "0.2.4", features = ["unproven"] }
-rppal = { version = "0.11.3", features = ["hal", "hal-unproven"] }
+rand = "0.7.3"
+rppal = { git = "https://github.com/golemparts/rppal/", features = ["hal", "hal-unproven"] }
