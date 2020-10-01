@@ -46,6 +46,10 @@ path = "src/09_timer555/timer555.rs"
 name = "hc595"
 path = "src/10_74HC595_LED/hc595.rs"
 
+[[bin]]
+name = "segment"
+path = "src/11_Segment/segment.rs"
+
 [dependencies]
 anyhow = "1.0.32"
 ctrlc = { version = "3.1.6", features = ["termination"] }
