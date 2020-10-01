@@ -19,7 +19,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// Once again decided it would be better to some more idiomatic Rust by using
+
+// Once again decided it would be better to have more idiomatic Rust by using
 // methods (functions) on a structure. Generally it better to represent a
 // hardware device as some kind of abstraction (object) that contain some state
 // and provide ways to change that state. The Python code could have done the
@@ -41,12 +42,12 @@ const SDI: u8 = 17;
 const RCLK: u8 = 18;
 const SRCLK: u8 = 27;
 const DELAY: u64 = 500;
+// Hexadecimal digits 0-F and decimal point.
 const SEG_CODES: [u8; 17] = [
     0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x77, 0x7c, 0x39, 0x5e, 0x79, 0x71,
     0x80,
 ];
 
-// Use a two dimensional array to hold several sequences of LED modes.
 fn main() -> Result<()> {
     println!(
         "11_Segment started on a {}",
