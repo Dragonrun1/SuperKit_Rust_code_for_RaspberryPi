@@ -1,6 +1,6 @@
 [package]
 name = "SuperKit_Rust_code_for_RaspberryPi"
-version = "0.0.3"
+version = "0.0.12"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
 categories = ["embedded", "hardware-support", "os", "os::linux-apis"]
@@ -53,6 +53,10 @@ path = "src/11_Segment/segment.rs"
 [[bin]]
 name = "dice"
 path = "src/11_Segment/dice.rs"
+
+[[bin]]
+name = "dot_matrix"
+path = "src/12_DotMatrix/doxMatrix.rs"
 
 [dependencies]
 anyhow = "1.0.32"
