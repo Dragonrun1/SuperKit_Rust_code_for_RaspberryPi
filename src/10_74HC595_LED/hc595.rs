@@ -27,20 +27,15 @@
 // same but for whatever reason they chose not to.
 
 use anyhow::{Context, Result};
-use rppal::{
-    gpio::{Gpio, OutputPin},
-    system::DeviceInfo,
-};
+use rppal::system::DeviceInfo;
 use std::{
     sync::atomic::{AtomicBool, Ordering},
     sync::Arc,
     thread::sleep,
     time::Duration,
 };
+use superkit_rust_code_for_raspberrypi::HC595;
 
-const SDI: u8 = 17;
-const RCLK: u8 = 18;
-const SRCLK: u8 = 27;
 const DELAY: u64 = 100;
 // Use a two dimensional array to hold several sequences of LED modes.
 const MODES: [[u8; 8]; 4] = [
@@ -91,64 +86,4 @@ fn main() -> Result<()> {
     }
     println!("\n10_74HC595_LED stopped");
     Ok(())
-}
-
-pub struct HC595 {
-    sdi: OutputPin,
-    rclk: OutputPin,
-    srclk: OutputPin,
-}
-
-impl HC595 {
-    /// Takes place of setup() from Python code.
-    pub fn new() -> Result<Self> {
-        let gpio = Gpio::new().context("Failed to get GPIO instance")?;
-        let mut sdi = gpio
-            .get(SDI)
-            .context("Failed to get sdi pin")?
-            .into_output();
-        sdi.set_low();
-        let mut rclk = gpio
-            .get(RCLK)
-            .context("Failed to get rclk pin")?
-            .into_output();
-        rclk.set_low();
-        let mut srclk = gpio
-            .get(SRCLK)
-            .context("Failed to get srclk pin")?
-            .into_output();
-        srclk.set_low();
-        Ok(HC595 { sdi, rclk, srclk })
-    }
-    /// Some function as hc595_in() from Python code.
-    pub fn serial_in(&mut self, data: u8) {
-        // Switch from bit shifting data around to iterating pre-calculated bit
-        // mask values.
-        for mask in ([0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01]).iter() {
-            if data & mask > 0 {
-                self.sdi.set_high();
-            } else {
-                self.sdi.set_low();
-            }
-            // Strobe shift register clock.
-            self.srclk.set_high();
-            sleep(Duration::from_micros(1));
-            self.srclk.set_low();
-        }
-    }
-    /// Same as hc595_out() function from Python code.
-    pub fn parallel_out(&mut self) {
-        // Strobe output latch clock.
-        self.rclk.set_high();
-        sleep(Duration::from_micros(1));
-        self.rclk.set_low();
-    }
-}
-
-/// Insure output on 75HC595 is all zero (off) before exiting.
-impl Drop for HC595 {
-    fn drop(&mut self) {
-        self.serial_in(0);
-        self.parallel_out();
-    }
 }

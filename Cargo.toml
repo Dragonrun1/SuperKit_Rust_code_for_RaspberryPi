@@ -1,5 +1,5 @@
 [package]
-name = "SuperKit_Rust_code_for_RaspberryPi"
+name = "superkit_rust_code_for_raspberrypi"
 version = "0.0.12"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
