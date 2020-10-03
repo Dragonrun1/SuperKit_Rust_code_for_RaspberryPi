@@ -40,7 +40,7 @@ path = "src/08_RotaryEncoder/rotaryEncoder.rs"
 
 [[bin]]
 name = "timer555"
-path = "src/09_timer555/timer555.rs"
+path = "src/09_Timer555/timer555.rs"
 
 [[bin]]
 name = "hc595"
@@ -58,9 +58,15 @@ path = "src/11_Segment/dice.rs"
 name = "dot_matrix"
 path = "src/12_DotMatrix/doxMatrix.rs"
 
+[[bin]]
+name = "lcd1602"
+path = "src/13_LCD1602/lcd1602.rs"
+
 [dependencies]
 anyhow = "1.0.32"
 ctrlc = { version = "3.1.6", features = ["termination"] }
 embedded-hal = { version = "0.2.4", features = ["unproven"] }
+hd44780-ntb = "0.0.5"
+linux-embedded-hal = "0.3.0"
 rand = "0.7.3"
 rppal = { git = "https://github.com/golemparts/rppal/", features = ["hal", "hal-unproven"] }
