@@ -1,66 +1,10 @@
 [package]
 name = "superkit_rust_code_for_raspberrypi"
-version = "0.0.12"
+version = "0.0.13"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
 categories = ["embedded", "hardware-support", "os", "os::linux-apis"]
 keywords = ["raspberry", "pi", "embedded-hal", "embedded-hardware", "learning-rust"]
-
-[[bin]]
-name = "led"
-path = "src/01_LED/led.rs"
-
-[[bin]]
-name = "btn_and_led"
-path = "src/02_BtnAndLed/btnAndLed.rs"
-
-[[bin]]
-name = "8led"
-path = "src/03_8Led/8Led.rs"
-
-[[bin]]
-name = "pwm_led"
-path = "src/04_PwmLed/pwmLed.rs"
-
-[[bin]]
-name = "rgb"
-path = "src/05_RGB/rgb.rs"
-
-[[bin]]
-name = "beep"
-path = "src/06_Beep/beep.rs"
-
-[[bin]]
-name = "motor"
-path = "src/07_Motor/motor.rs"
-
-[[bin]]
-name = "rotary_encoder"
-path = "src/08_RotaryEncoder/rotaryEncoder.rs"
-
-[[bin]]
-name = "timer555"
-path = "src/09_Timer555/timer555.rs"
-
-[[bin]]
-name = "hc595"
-path = "src/10_74HC595_LED/hc595.rs"
-
-[[bin]]
-name = "segment"
-path = "src/11_Segment/segment.rs"
-
-[[bin]]
-name = "dice"
-path = "src/11_Segment/dice.rs"
-
-[[bin]]
-name = "dot_matrix"
-path = "src/12_DotMatrix/doxMatrix.rs"
-
-[[bin]]
-name = "lcd1602"
-path = "src/13_LCD1602/lcd1602.rs"
 
 [dependencies]
 anyhow = "1.0.32"
