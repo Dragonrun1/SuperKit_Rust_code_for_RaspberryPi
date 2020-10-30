@@ -3,6 +3,14 @@
 This is a [Rust] version of the lessons from the [Sunfounder]'s
 [Super Starter Kit V2.0 for Raspberry Pi].
 This kit is compatible with Raspberry Pi 4B/3B/3B+/2B/B+.
+Additional descriptions for the lessons can be found in
+[Lessons.md](docs/Lessons.md).
+
+## Table Of Contents
+
+  * [About The Code](#about-the-code)
+  * [Contributing](#contributing)
+  * [Licenses](#licenses)
 
 ## About The Code
 

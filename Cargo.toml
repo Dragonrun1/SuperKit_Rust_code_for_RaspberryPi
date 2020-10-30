@@ -1,12 +1,13 @@
 [package]
 name = "superkit_rust_code_for_raspberrypi"
-version = "0.0.13"
+version = "0.0.14"
 authors = ["Michael Cummings <dragonrun1@gmail.com>"]
 edition = "2018"
 categories = ["embedded", "hardware-support", "os", "os::linux-apis"]
 keywords = ["raspberry", "pi", "embedded-hal", "embedded-hardware", "learning-rust"]
 
 [dependencies]
+adxl345_driver = "0.0.6"
 anyhow = "1.0.32"
 ctrlc = { version = "3.1.6", features = ["termination"] }
 embedded-hal = { version = "0.2.4", features = ["unproven"] }
